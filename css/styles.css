@@ -16,7 +16,7 @@
       --black: #080808;
       --black2: #111111;
       --black3: #181818;
-      --white: #FFFFFF;
+      --white: #F4F3EB;
       --gray: #F2F2F0;
       --gray2: #E8E8E6;
       --muted: #999998;
@@ -840,7 +840,7 @@
 ═══════════════════════════════════════ */
     .marquee-strip {
       background: var(--red);
-      padding: 14px 0;
+      padding: 8px 0;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
@@ -860,7 +860,7 @@
 
     .marquee-item {
       font-family: var(--bebas);
-      font-size: 15px;
+      font-size: 25px;
       letter-spacing: 4px;
       color: var(--white);
       display: inline-flex;
@@ -958,8 +958,8 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 90px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10px;
       align-items: center;
       position: relative;
       z-index: 1;
@@ -1041,14 +1041,15 @@
     .about-body {
       font-size: 14px;
       color: rgba(0, 0, 0, 0.6);
-      line-height: 1.95;
-      margin-bottom: 18px;
-      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-weight: 400;
     }
 
     .about-tags {
       display: flex;
       flex-wrap: wrap;
+      justify-content: end;
       gap: 8px;
       margin-top: 32px;
     }
@@ -1590,11 +1591,85 @@
       background: var(--black);
     }
 
+    .testimonials-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .testimonials-meta {
+      max-width: 420px;
+    }
+
+    .testimonials-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .testimonials-summary {
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.58);
+      font-weight: 400;
+    }
+
+    .testimonials-trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 28px 0 22px;
+    }
+
+    .trust-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+      font-weight: 600;
+    }
+
+    .testimonials-slider {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .testimonials-viewport {
+      overflow: hidden;
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    .testimonials-track {
+      display: flex;
+      gap: 12px;
+      transition: transform 0.55s cubic-bezier(.2, .8, .2, 1);
+      will-change: transform;
+    }
+
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      /* background: rgba(255, 255, 255, 0.04); */
       margin-top: 60px;
       padding-bottom: 60px;
     }
@@ -1605,6 +1680,8 @@
       position: relative;
       transition: background .3s;
       overflow: hidden;
+      flex: 0 0 calc((100% - 24px) / 3);
+      min-width: 0;
     }
 
     .testi-card::before {
@@ -1642,6 +1719,33 @@
       transform: scaleX(1);
     }
 
+    .testimonials-nav {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform .25s, border-color .25s, background .25s, opacity .25s;
+    }
+
+    .testimonials-nav:hover {
+      transform: translateY(-2px);
+      border-color: rgba(224, 0, 0, 0.35);
+      background: rgba(224, 0, 0, 0.08);
+    }
+
+    .testimonials-nav:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .testi-text {
       font-size: 13px;
       color: rgba(255, 255, 255, 0.6);
@@ -1671,6 +1775,29 @@
       font-size: 10px;
       color: var(--muted2);
       margin-top: 3px;
+    }
+
+    .testimonials-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-bottom: 10px;
+    }
+
+    .testimonials-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: transform .25s, background .25s;
+    }
+
+    .testimonials-dot.active {
+      background: var(--red);
+      transform: scale(1.2);
     }
 
     /* ═══════════════════════════════════════
@@ -1987,6 +2114,27 @@
         grid-template-columns: 1fr;
       }
 
+      .testimonials-head {
+        align-items: flex-start;
+      }
+
+      .testimonials-slider {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .testimonials-nav {
+        display: none;
+      }
+
+      .testimonials-track {
+        gap: 0;
+      }
+
+      .testi-card {
+        flex-basis: 100%;
+      }
+
       .clients-header {
         flex-direction: column;
         gap: 20px;
@@ -2146,6 +2294,12 @@
     .clients-grid {
       border-radius: 18px;
       overflow: hidden;
+    }
+
+    .testimonials-viewport,
+    .testimonials-track {
+      border-radius: 18px;
+      padding-bottom: 50px;
     }
 
     .db-stat-card {
@@ -2462,6 +2616,43 @@ html:not(.gsap-ready) #page-curtain { animation: curtain-lift 0.6s ease 1.2s for
 }
 body.custom-cursor.has-preview .client-card,
 body.custom-cursor.has-preview .case-card { cursor: none; }
+
+/* Modern GSAP interaction layer */
+.motion-spotlight {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.motion-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(224,0,0,0.18), transparent 34%);
+  transition: opacity .28s ease;
+}
+
+.motion-spotlight:hover::before {
+  opacity: 1;
+}
+
+.motion-spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+.magnetic-target,
+.section-depth {
+  will-change: transform;
+}
+
+.scroll-reveal-mask {
+  clip-path: inset(0 0 100% 0);
+}
 
 /* ── SCRUBBED BENTO GALLERY ── */
 #bento { background: var(--black); position: relative; overflow: hidden; }

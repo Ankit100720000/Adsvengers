@@ -401,10 +401,99 @@ if (casesSec) {
 const testimonialsSec = document.getElementById('testimonials');
 if (testimonialsSec) {
   gsap.from('#testimonials .testi-card', {
-    scrollTrigger: { trigger: '#testimonials .testimonials-grid', start: 'top 75%' },
+    scrollTrigger: { trigger: '#testimonials .testimonials-slider, #testimonials .testimonials-grid', start: 'top 75%' },
     y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out'
   });
 }
+
+document.querySelectorAll('.testimonials-slider').forEach((slider) => {
+  const track = slider.querySelector('.testimonials-track');
+  const cards = Array.from(slider.querySelectorAll('.testi-card'));
+  const prevBtn = slider.querySelector('.testimonials-prev');
+  const nextBtn = slider.querySelector('.testimonials-next');
+  const dotsWrap = slider.parentElement.querySelector('.testimonials-dots');
+  if (!track || cards.length <= 1) return;
+
+  let index = 0;
+  let autoplay;
+  let dots = [];
+
+  const getVisibleCount = () => window.innerWidth <= 900 ? 1 : 3;
+
+  const maxIndex = () => Math.max(0, cards.length - getVisibleCount());
+
+  const buildDots = () => {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    dots = Array.from({ length: maxIndex() + 1 }, (_, dotIndex) => {
+      const dot = document.createElement('button');
+      dot.className = 'testimonials-dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to testimonial group ${dotIndex + 1}`);
+      dot.addEventListener('click', () => {
+        goTo(dotIndex);
+        startAutoplay();
+      });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+  };
+
+  const syncSlider = () => {
+    const gap = window.innerWidth <= 900 ? 0 : 12;
+    const cardWidth = cards[0].getBoundingClientRect().width + gap;
+    gsap.to(track, {
+      x: -index * cardWidth,
+      duration: 0.55,
+      ease: 'power3.out',
+      overwrite: true
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('active', dotIndex === index);
+    });
+
+    if (prevBtn) prevBtn.disabled = maxIndex() === 0;
+    if (nextBtn) nextBtn.disabled = maxIndex() === 0;
+  };
+
+  const goTo = (nextIndex) => {
+    index = Math.max(0, Math.min(nextIndex, maxIndex()));
+    syncSlider();
+  };
+
+  const startAutoplay = () => {
+    clearInterval(autoplay);
+    autoplay = setInterval(() => {
+      index = index >= maxIndex() ? 0 : index + 1;
+      syncSlider();
+    }, 4200);
+  };
+
+  prevBtn?.addEventListener('click', () => {
+    goTo(index <= 0 ? maxIndex() : index - 1);
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    goTo(index >= maxIndex() ? 0 : index + 1);
+    startAutoplay();
+  });
+
+  slider.addEventListener('mouseenter', () => clearInterval(autoplay));
+  slider.addEventListener('mouseleave', startAutoplay);
+
+  window.addEventListener('resize', () => {
+    buildDots();
+    index = Math.min(index, maxIndex());
+    syncSlider();
+    startAutoplay();
+  });
+
+  buildDots();
+  syncSlider();
+  startAutoplay();
+});
 
 // ── CONTACT ─────────────────────────────────
 const contactSec = document.getElementById('contact');
@@ -704,6 +793,72 @@ document.querySelectorAll('.stat-card, .db-stat-card').forEach(card => {
 })();
 
 // ── CURSOR-TRACKING IMAGE PREVIEW ────────────
+// Modern GSAP polish: magnetic CTAs, cursor spotlights, and scroll depth.
+(function () {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const spotlightTargets = document.querySelectorAll('.stat-card, .service-card, .case-card, .testi-card, .client-card, .bento-tile');
+  const magneticTargets = document.querySelectorAll('.btn-pill-primary, .nav-cta-pill, .btn-cta-white, .form-submit, .testimonials-nav');
+
+  spotlightTargets.forEach((card) => {
+    card.classList.add('motion-spotlight');
+    if (!canHover) return;
+
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${x}%`);
+      card.style.setProperty('--my', `${y}%`);
+    });
+  });
+
+  if (canHover) {
+    magneticTargets.forEach((el) => {
+      el.classList.add('magnetic-target');
+      el.addEventListener('mousemove', (event) => {
+        const rect = el.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        gsap.to(el, {
+          x: x * 0.18,
+          y: y * 0.22,
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: true
+        });
+      });
+
+      el.addEventListener('mouseleave', () => {
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          duration: 0.55,
+          ease: 'elastic.out(1, 0.45)',
+          overwrite: true
+        });
+      });
+    });
+  }
+
+  gsap.utils.toArray('section').forEach((section) => {
+    section.classList.add('section-depth');
+    gsap.fromTo(section,
+      { opacity: 0.88, y: 18 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 92%',
+          end: 'top 58%',
+          scrub: true
+        }
+      }
+    );
+  });
+})();
+
 (function () {
   const canHover = window.matchMedia('(hover: hover)').matches && window.innerWidth > 900;
   const triggers = document.querySelectorAll('.client-card, .case-card');

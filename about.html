@@ -51,14 +51,22 @@
     </div>
 
     <nav id="main-nav" class="scrolled">
-        <a href="index.html" class="nav-logo" aria-label="Adsvengers home">ADSVENGERS<span>DIGITAL MARKETING
-                AGENCY</span></a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="services.html">Services</a>
-            <a href="work.html">Work</a>
-            <a href="contact.html" class="nav-cta">Work With Us</a>
+        <a href="index.html" class="nav-logo" aria-label="Adsvengers home">
+            ADSVENGERS.
+        </a>
+        <div class="nav-links-pill-container">
+            <div class="nav-links-pill">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="services.html">Services</a>
+                <a href="work.html">Work</a>
+            </div>
+        </div>
+        <div class="nav-cta-pill-container">
+            <a href="contact.html" class="nav-cta-pill">
+                Let's Collaborate
+                <span class="cta-arrow-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+            </a>
         </div>
         <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
             <span></span><span></span><span></span>
@@ -178,10 +186,28 @@
 
     <!-- TESTIMONIALS -->
     <section id="testimonials">
-        <div class="sec-label">Testimonials</div>
-        <h2 class="sec-title">WHAT CLIENTS<br>SAY</h2>
-        <div class="testimonials-grid">
-            <div class="testi-card">
+        <div class="testimonials-head">
+            <div>
+                <div class="sec-label">Testimonials</div>
+                <h2 class="sec-title">WHAT CLIENTS<br>SAY</h2>
+            </div>
+            <div class="testimonials-meta">
+                <div class="testimonials-rating">5.0 Client Satisfaction</div>
+                <p class="testimonials-summary">Partners trust us for sharper media buying, stronger lead quality, and cleaner growth systems.</p>
+            </div>
+        </div>
+        <div class="testimonials-trust-strip" aria-label="Client trust indicators">
+            <div class="trust-chip">40+ campaigns launched</div>
+            <div class="trust-chip">Cross-city delivery</div>
+            <div class="trust-chip">Performance-first reporting</div>
+        </div>
+        <div class="testimonials-slider" data-slider="testimonials">
+            <button class="testimonials-nav testimonials-prev" type="button" aria-label="Previous testimonial">
+                <span>&larr;</span>
+            </button>
+            <div class="testimonials-viewport">
+                <div class="testimonials-track">
+            <article class="testi-card">
                 <p class="testi-text">Adsvengers brought us exactly the kind of buyer we were looking for — serious,
                     high-intent,
                     and ready to visit. The quality of leads was far better than anything we'd seen before.</p>
@@ -189,8 +215,8 @@
                     <div class="testi-name">Senior Sales Head</div>
                     <div class="testi-role">Luxury Real Estate Project, Noida</div>
                 </div>
-            </div>
-            <div class="testi-card">
+            </article>
+            <article class="testi-card">
                 <p class="testi-text">We went from struggling with ₹400 CPL campaigns to an 18x return in weeks. This
                     team doesn't
                     just run ads — they build systems. Every decision was data-backed, every rupee accountable.</p>
@@ -198,8 +224,8 @@
                     <div class="testi-name">Marketing Director</div>
                     <div class="testi-role">EdTech Platform, Online Courses</div>
                 </div>
-            </div>
-            <div class="testi-card">
+            </article>
+            <article class="testi-card">
                 <p class="testi-text">Working with Adsvengers felt like having a growth partner, not just a vendor. They
                     understood
                     our brand, our buyer, and our market. Results came fast — and they kept compounding.</p>
@@ -207,7 +233,35 @@
                     <div class="testi-name">Founder</div>
                     <div class="testi-role">Real Estate Consultancy, NCR</div>
                 </div>
+            </article>
+            <article class="testi-card">
+                <p class="testi-text">The campaign structure was clean from day one. We could see what was working, where leads were coming from, and how the budget was being scaled.</p>
+                <div class="testi-author">
+                    <div class="testi-name">Growth Lead</div>
+                    <div class="testi-role">Premium Housing Brand, Greater Noida</div>
+                </div>
+            </article>
+            <article class="testi-card">
+                <p class="testi-text">They understood the difference between cheap leads and qualified prospects. That single shift changed the way our sales team worked the pipeline.</p>
+                <div class="testi-author">
+                    <div class="testi-name">Sales Director</div>
+                    <div class="testi-role">Luxury Residential Developer</div>
+                </div>
+            </article>
+            <article class="testi-card">
+                <p class="testi-text">The creative testing system gave us clarity fast. Instead of guessing, we knew which hooks, audiences, and landing page angles deserved more spend.</p>
+                <div class="testi-author">
+                    <div class="testi-name">Performance Head</div>
+                    <div class="testi-role">Online Learning Platform</div>
+                </div>
+            </article>
+                </div>
             </div>
+            <button class="testimonials-nav testimonials-next" type="button" aria-label="Next testimonial">
+                <span>&rarr;</span>
+            </button>
+        </div>
+        <div class="testimonials-dots" aria-label="Testimonial slides">
         </div>
     </section>
 
